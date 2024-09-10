@@ -1,0 +1,535 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+                integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+                crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js" 
+                integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg==" 
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+        <style>
+            *{
+                padding: 0;
+                margin:0;
+            }
+
+            body {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                min-height: 100vh;
+
+            }
+
+            .parent {
+                display: flex;
+                min-height: 100vh;
+                flex: 1;
+                
+                
+            }
+
+            /* Sidebar styling */
+            .side-navbar {
+                flex: 1;
+                color: aliceblue;
+                text-align: center;
+                background-color: #404e67;
+                z-index: 1000;
+                transition:flex 100s ease;
+
+            }
+            .hidden{
+                flex:0.2;
+                transition: all 1s ease;
+                }
+            .hidden ul a{
+                padding-left: 1.5rem;
+            }
+
+            .fa-arrow-right {
+                display: none;
+            }
+
+            .side-navbar ul {
+                padding:2rem;
+                padding-left: 0;
+            }
+
+            .side-navbar ul li {
+                list-style: none;
+                font-family:"open sans",sans-serif;
+                padding:1rem;
+            }
+
+             ul li a {
+                display: flex;
+                align-items: center;
+                gap:1.5rem;
+                text-decoration: none;
+                color: rgba(227, 224, 224, 0.87);
+            }
+            .side-navbar ul li a:hover{
+                color: #da3f3f;
+            }
+
+            .side-navbar ul li a span {
+                display: block;
+            }
+
+            .icons-only .fa-arrow-left {
+                display: none;
+            }
+
+            .icons-only .fa-arrow-right {
+                display: block;
+            
+            }
+
+            .icons-only ul li a span {
+                display: none;
+            }
+
+            .mobile-sidebar {
+                flex: 1.5;
+                color: aliceblue;
+                text-align: center;
+                background-color: #404e67;
+                transition: transform 0.3s ease, flex 0.3s ease;
+                display: none;
+                z-index: 1000;
+            }
+
+            .mobile-sidebar .srch {
+                padding-top: 0.7rem;
+            }
+
+            .mobile-sidebar ul {
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .mobile-sidebar ul li {
+                padding: 1rem;
+                list-style: none;
+            }
+
+            .mobile-sidebar ul li a {
+                padding: 0.5rem;
+                text-decoration: none;
+                color: rgb(235, 223, 223);
+            }
+            .fa-blog{
+                padding:1rem
+            }
+            @keyframes cards{
+                0%{
+                    transform: translateX(30rem);
+                }
+                100%{
+                    transform: translateX(0);
+                }
+            }
+            @keyframes cards1{
+                0%{
+                    transform: translateX(10rem);
+                }
+                100%{
+                    transform: translateX(0);
+                }
+            }
+            @keyframes cards2{
+                0%{
+                    transform: translateX(-10rem);
+                }
+                100%{
+                    transform: translateX(0);
+                }
+            }
+            @keyframes cards3{
+                0%{
+                    transform: translateX(-30rem);
+                }
+                100%{
+                    transform: translateX(0);
+                }
+            }
+
+            /* Main content styling */
+            .main {
+                display: flex;
+                flex: 7;
+                background-color: rgb(222, 231, 229);
+                flex-direction: column;
+
+            }
+
+            .srch1 {
+                height: 1rem;
+                color: black;
+            }
+
+            header{
+                flex:1;
+                background:white;
+                box-shadow: rgba(26, 26, 132, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                color: black;
+                padding:1rem;
+                top: 0%;
+                width:100%;
+                position:fixed;
+                right:0;
+                text-align:right;
+
+            }
+            header>div{
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            #navbar-menu-toggle1 {
+                display: none;
+            }
+
+            .srch1 {
+                padding: 0.5rem;
+                text-align: center;
+            }
+
+            .content {
+                display: grid;
+                padding:4rem;
+                padding-top:8rem;
+                padding-bottom: 5rem;
+                justify-content:center;
+                gap:3rem;
+                grid-template-columns: repeat(4,1fr);
+                overflow: hidden;
+                
+            }
+            .content > div{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                font-family:"open sans",sans-serif;
+                background-color: #ffffff;
+                width: 100%;
+                height: fit-content;
+                
+                
+            
+                
+            }
+            .content >div:hover{
+                background:white;
+                box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            }
+            .count{
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: xx-large;
+                color: #fe9365;
+                padding: 0.7rem;
+                text-align: left;
+                
+                
+            }
+            .count .text{
+                color: rgb(143, 139, 139);
+                font-size:1rem;
+            }
+            .a{
+                animation-name: cards;
+                animation-duration: 4s;
+            }
+            .b{
+                animation-name: cards1;
+                animation-duration: 6s;
+            }
+            .c{
+                animation-name: cards2;
+                animation-duration: 6s;
+            }
+            .d{
+                animation-name: cards3;
+                animation-duration:4s;
+            }
+
+            .bg-orange{
+                background: -webkit-gradient(linear,left top,right top,from(#fe9365),to(#feb798));
+                background: linear-gradient(to right,#fe9365,#feb798)
+    
+            }
+            .bg-green{
+                background: -webkit-gradient(linear,left top,right top,from(#0ac282),to(#0df3a3));
+                background: linear-gradient(to right,#0ac282,#0df3a3);
+             }
+             .bg-pink{
+                background: -webkit-gradient(linear,left top,right top,from(#fe5d70),to(#fe909d));
+                background: linear-gradient(to right,#fe5d70,#fe909d)
+
+             }
+             .bg-blue{
+                background: -webkit-gradient(linear,left top,right top,from(#01a9ac),to(#01dbdf));
+                background: linear-gradient(to right,#01a9ac,#01dbdf)
+
+             }
+            .change{
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 0.8rem;
+                padding: 1rem;
+                color: rgb(244, 237, 237);
+            }
+
+            .fa-bars {
+                cursor: pointer;
+            }
+
+            .fa-circle-xmark {
+                cursor: pointer;
+            }
+
+            /* Footer styling */
+            footer {
+                flex:1;
+                background: rgb(243, 243, 245);
+                background: linear-gradient(90deg, rgba(243, 243, 245, 1) 100%, rgba(9, 9, 121, 1) 100%);
+                color: black;
+                padding:1rem;
+                bottom: 0%;
+                width:100%;
+                position:fixed;
+                right:0;
+                text-align: center;
+            }
+        
+
+            /* Mobile responsiveness */
+        @media (max-width: 800px) {
+        .side-navbar {
+                    display: none;
+                }
+        .content{
+                    grid-template-columns: repeat(2,1fr);
+                }
+        .content > div{
+                width:100%;
+                height: fit-content;
+                }
+        img{
+            padding-top: 1rem;
+            width:5rem;
+            height:5rem;
+        }
+        h1{
+            font-size: small;
+        }
+
+                .card {
+                    width: calc(50% - 2rem);
+                }
+
+                .srch1 {
+                    display: none;
+                }
+
+                #navbar-menu-toggle1 {
+                    display: block;
+                }
+            }
+            @media (max-width:600px){
+            .content{
+                grid-template-columns: repeat(1,1fr);
+            }
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="parent">
+            <div class="side-navbar" id="sideNavbar">
+                <p style="text-align: end; padding-right: 0.5rem;">
+                    <i class="fa-solid fa-arrow-left" onclick="closeSidebar()"></i>
+                    <i class="fa-solid fa-arrow-right" onclick="showNavbar1()"></i>
+                </p>
+                <i style="text-align: center;" class="fa-solid fa-blog"></i>
+                <ul class="i" id="words">
+                    
+                    <li><a href=""><i class="fa-regular fa-user"></i><span id="profile">Profile</span></a></li>
+                    <li><a href="Product.html"><i class="fa-regular fa-address-card"></i><span>Product</span></a></li>
+                    <li><a href="User.html"><i class="fa-brands fa-aws"></i><span>User_List</span></a></li>
+                    <li><a href=""><i class="fa-regular fa-address-book"></i><span>Contact</span></a></li>
+                    <li><a href="Login.html" onclick="logout()";><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+            <main class="main">
+                <header class="header-right">
+                    <div>
+                    <input style="border-radius: 1rem;" class="srch1" type="text" placeholder="search......">
+                    <p class="srch1">
+                        <i class="fa-solid fa-search" onclick="search()"></i>
+                    </p>
+                    <i class="fa-solid fa-bars srch1" id="navbar-menu-toggle1" onclick="showNavbar2()"></i>
+                    </div>
+                </header>
+                <div class="content" id="content">
+                        <div class="a">
+                            <div class="count">
+                                <div>
+                                    <span id="user_count">0</span>
+                                    <p class="text">User Count</p>
+                                </div>
+                                <div>
+                                    <i style="color: black; font-size: 1.5rem;" class="fa-solid fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="change bg-orange" >
+                                <p>% Change</p>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            
+                            </div>
+                        <div class="b">
+                        <div class="count">
+                            <div>
+                                    <span id="product_count">0</span>
+                                    <p class="text">Product Count</p>
+                            </div>
+                                <div>
+                                    <i style="color: black; font-size: 1.5rem;" class="fa-brands fa-product-hunt"></i>
+                                </div>
+                            </div>
+                            <div class="change bg-green">
+                                <p>% Change</p>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="c">
+                            <div class="count">
+                                <div>
+                                    <span id="product_count">0</span>
+                                    <p class="text">Today Login Count</p>
+                                </div>
+                                <div>
+                                    <i style="color: black; font-size: 1.5rem;" class="fa-solid fa-anchor-lock"></i>
+                                </div>
+                            </div>
+                            <div class="change bg-pink">
+                                <p>% Change</p>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="d">
+                            <div class="count">
+                                <div>
+                                    <span id="product_count">0</span>
+                                    <p class="text">Order Count</p>
+                                </div>
+                                <div>
+                                    <i style="color: black; font-size: 1.5rem;" class="fa-solid fa-door-open"></i>
+                                </div>
+                            </div>
+                            <div class="change bg-blue">
+                                <p>% Change</p>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <footer class="footer">
+                        Designed by ________________
+                    </footer>
+            </main>
+            <div class="mobile-sidebar" id="mobileSidebar">
+                <p style="text-align: end;">
+                    <i class="fa-regular fa-circle-xmark" onclick="closeMobileSidebar()"></i>
+                </p>
+                <i class="fa-solid fa-blog"></i>
+                <p>
+                    <input style="border-radius: 1.5rem;"  class="srch" type="text">
+                    <i class="fa-solid fa-search srch" onclick="search()"></i>
+                </p>
+                <ul>
+                    <li><a href=""><i class="fa-regular fa-user"></i><span id="profile1">Profile</span></a></li>
+                    <li><a href="Product.html"><i class="fa-regular fa-address-card"></i>Product</a></li>
+                    <li><a href="User.html"><i class="fa-brands fa-aws"></i>User_List</a></li>
+                    <li><a href=""><i class="fa-regular fa-address-book"></i>Contact</a></li>
+                    <li><a href="Login.html" onclick="logout()";><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            function closeSidebar() {
+                document.getElementById('sideNavbar').classList.add('hidden');
+                document.getElementById("sideNavbar").classList.add("icons-only");
+            }
+
+            function showNavbar1() {
+                document.getElementById('sideNavbar').classList.remove('hidden');
+                document.getElementById("sideNavbar").classList.remove("icons-only");
+            }
+
+            function showNavbar2() {
+                document.getElementById('navbar-menu-toggle1').style.visibility = "hidden";
+                document.getElementById('mobileSidebar').style.display = "block";
+            }
+
+            function closeMobileSidebar() {
+                document.getElementById('navbar-menu-toggle1').style.visibility = "visible";
+                document.getElementById('mobileSidebar').style.display = "none";
+            }
+
+            function search() {
+                alert('Search functionality is not implemented.');
+            }
+            async function fetchCounts(){
+                try{
+                    const userResponse = await axios.get('http://127.0.0.1:8888/api/auth/user_count');
+                    document.getElementById('user_count').textContent=userResponse.data.count;
+
+                    const productResponse=await axios.get('http://127.0.0.1:8888/api/product/product_count');
+                    document.getElementById('product_count').textContent=productResponse.data.count;
+
+                }catch(error){
+                    console.error("Error fetching counts",error);
+                }
+            }
+            window.onload = fetchCounts();
+            // Automatically load products when the page loads
+            window.addEventListener('resize', function () {
+                if (window.innerWidth < 800) {
+                    closeSidebar();
+                }
+                if (window.innerWidth > 800) {
+                    showNavbar1()
+                    closeMobileSidebar();
+                }
+
+            });
+            function logout(){
+                localStorage.removeItem('authToken')
+            }
+            window.onload=function(){
+                const user_name=localStorage.getItem('name')
+                const authToken=localStorage.getItem('authToken')
+                console.log(user_name)
+                document.getElementById('profile').textContent=`${user_name}_Profile`;
+                document.getElementById('profile1').textContent=`${user_name}_Profile`;
+                if(!authToken){
+                    window.location="Login.html"
+                }
+            }
+        </script>
+    </body>
+
+    </html>

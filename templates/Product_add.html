@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js" 
+        integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+        *{
+            margin: 0%;
+            padding: 0rem;
+        }
+        body{
+            display: flex;
+            position: relative;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Crimson Text", serif;
+            background-color: #262f40;
+        }
+        .login{
+            background:rgba(216, 214, 214, 0.733);
+            border-radius: 15px 50px;
+            color: rgb(8, 9, 10);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            padding: 3.5rem;
+            width: 20%;
+            height: fit-content;
+        }
+        .login:hover{
+            background-color: whitesmoke;
+            color:black;
+            transition: background-color 0.5s ease;
+        }
+        .details{
+            padding: 0.5rem;
+            font-size: x-large;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-style: bold;
+            text-align: left;
+        }
+        .user{
+            padding: 1rem;
+            padding-left: 0rem;
+        }
+        .head{
+            color:rgb(21, 15, 15);
+            padding:1rem;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: larger;
+            font-weight: 700;
+        }
+        p{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: medium;
+            font-weight: 700rem;
+            padding-bottom: .5rem;
+        }
+        h1{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        a{
+            text-decoration: none;
+            color: rgb(12, 17, 18);
+            font-size: large;
+        }
+        .button-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+        }
+        button{
+            display: flex;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 2rem;
+            color: rgb(8, 7, 7);
+            background-color:transparent;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            width: 10rem;
+            height: 2rem;
+            cursor: pointer;
+        }
+        input{
+            border-radius:0.5rem ;
+            border-color:rgb(7, 3, 3);
+            border-style: solid;
+            background-color: transparent;
+            font-size: 1rem;
+            padding:0.5rem;
+            padding-left: 0.2rem;
+            width: 100%;
+        }
+        @media (max-width: 800px){
+            .login{
+                width: 65%;
+                font-size: medium;
+            }
+            .details{
+                font-size: larger;
+            }
+            input{
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <p class="head">Product Form</p>
+        <form id="productForm">
+            <div class="details">
+                <p>Name:</p>
+                <input type="text" id="name" required>
+            </div>
+            <div class="details">
+                <p>Description:</p>
+                <input type="text" id="description" required>
+            </div>
+            <div class="details">
+                <p>Image</p>
+                <input type="file" id="image" required>
+            </div>
+            <div class="details">
+                <p>Price:</p>
+                <input type="number" id="price" required>
+            </div>
+            <div class="details">
+                <p>Quantity:</p>
+                <input type="number" id="qty" required>
+            </div>
+        </form>
+            <div class="button-container">
+                <button type="submit" onclick="submitProduct()">Add Product</button>
+            </div>
+        
+    </div>
+
+    <script>
+        async function submitProduct() {  // Prevent form from refreshing the page
+    
+            let name = document.getElementById('name').value;
+            let description = document.getElementById('description').value;
+            let image = document.getElementById('image').files[0];
+            let price = document.getElementById('price').value;
+            let qty = document.getElementById('qty').value;
+    
+            // Create FormData object for file upload
+            let formData = new FormData();
+            formData.append('file', image);
+    
+            try {
+                // First, upload the image
+                const imgUrl = await axios.post('http://127.0.0.1:8888/api/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+    
+                const imageUrl = imgUrl.data;
+    
+                // After successful image upload, call the add product API
+                const productData = {
+                    name: name,
+                    description: description,
+                    image: imageUrl,
+                    price: price,
+                    qty: qty
+                };
+    
+                await axios.post('http://127.0.0.1:8888/api/product/add', productData);
+                alert("Product Add Successfully")
+                window.location= "Home.html";  // Corrected URL path for redirection
+            
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Error occurred while adding the product");
+            }
+        }
+        window.onload=function(){
+                const authToken=localStorage.getItem('authToken')
+                if(!authToken){
+                    window.location="Login.html"
+                }
+            }
+    </script>
+    
+</body>
+</html>
