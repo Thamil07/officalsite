@@ -1,234 +1,398 @@
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width , initial-scale=1.0">
-            <title>Product Page</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-                integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-                crossorigin="anonymous" referrerpolicy="no-referrer" />
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js" 
-                integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg==" 
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <style>
-            *{
-                margin:0;
-                padding:0;
-                font-family: "Outfit", sans-serif;
-            }
-            body{
-                display: flex;
-                flex-direction: column;
-                background: rgb(249, 252, 252);
-
-            }
-            .header{
-                display:flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: white;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-                width: 100%;
-                height: 4rem;
-                
-            }
-            @keyframes img {
-                0%{
-                    transform: translateY(0rem);
-                }
-                25%{
-                    transform: translateY(-5rem);
-                }
-                50%{
-                    transform: translateY(0rem);
-                }
-                75%{
-                    transform: translateY(-5rem);
-                }
-                100%{
-                    transform:translateY(0rem);
-                }
-                
-            }
-            .header p{
-                font-size: 1.5rem;
-                font-weight: 700;
-            }
-            .parent{
-                padding: 4rem;
-                display:grid;
-                grid-template-columns:repeat(4,1fr);
-                gap: 4rem;
-
-            }
-            a{
-                text-decoration: none;
-                color: black;
-                font-size:large;
-                padding: 1rem;
-            }
-            div.product-card{
-
-                background: rgb(5,84,216);
-                background: linear-gradient(360deg, rgb(250, 251, 253) 0%, rgba(220, 227, 239, 0.671) 29%, rgba(243, 243, 243, 0.205) 100%);
-                padding:1rem;
-                text-align: center;
-                color: aliceblue;
-                border-radius: 1rem;
-            }
-            .name{
-                color: black;
-                font-size: xx-large;
-                font-weight: 650;
-                padding:0.7rem;
-            }
-            p{
-                color: rgb(0, 0, 0);
-                font-size: 1.2rem;
-                
-            }
-            .redirect:hover{
-                color: brown;
-
-            }
-            .content{
-                padding:0.5rem;
-            }
-            
-            .quantity{
-                font-size: 1rem;
-            }
-            div.product-card:hover{
-                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-                transition: box-shadow 0.3s ease;
-                background-color: white;
-            
-
-            }
-            div.product-card:hover img{
-                animation: img 4s infinite;
-
-            }
-            .banner{
-                position: relative;
-                width: 90%;
-                height: 20rem;
-                margin: 2rem 9rem;
-            }
-            .image1{
-                display: block;
-            }
-            .image2{
-                display: none;
-            }
-            .image3{
-                display: none;
-            }
-            .banner img{
-                width: 90%;
-                height: 25rem;
-                object-fit: cover;
-            }
-            .banner i {
-            position: absolute;
-            top: 50%;
-            
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <title>Product Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js"
+      integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Outfit", sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        background: rgb(249, 252, 252);
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        width: 100%;
+        height: 4rem;
+      }
+      @keyframes img {
+        0% {
+          transform: translateY(0rem);
         }
+        25% {
+          transform: translateY(-5rem);
+        }
+        50% {
+          transform: translateY(0rem);
+        }
+        75% {
+          transform: translateY(-5rem);
+        }
+        100% {
+          transform: translateY(0rem);
+        }
+      }
+      .header p {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .parent {
+        padding: 4rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4rem;
+      } 
+      .parent img {
+        border-radius: 1rem;
+        height: 7rem;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+        font-size: large;
+        padding: 1rem; 
+      } 
+      div.product-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: rgb(5, 84, 216);
+        background: linear-gradient(
+          360deg,
+          rgb(250, 251, 253) 0%,
+          rgba(220, 227, 239, 0.671) 29%,
+          rgba(243, 243, 243, 0.205) 100%
+        );
+        /* padding: 1rem; */
+        text-align: center;
+        color: aliceblue;
+        border-radius: 1rem;
+      }
+      .name {
+        color: black;
+        font-size: xx-large;
+        font-weight: 650;
+        padding: 0.7rem;
+      }
+      p {
+        color: rgb(0, 0, 0);
+        font-size: 1.2rem;
+      }
+      .redirect:hover {
+        color: brown;
+      }
+      .content {
+        padding: 0.5rem;
+      }
 
-            i .left{
-                left:10%;
-            }
-            img{
-                border-radius: 1rem;
-                height:10rem;
-            }
-        </style>
-            </head>
+      .quantity {
+        font-size: 1rem;
+      }
+      div.product-card:hover {
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
+          rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+          rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px,
+          rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        transition: box-shadow 0.3s ease;
+        background-color: white;
+      }
+      div.product-card:hover img {
+        animation: img 4s infinite;
+      }
+      .bannerwrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-top: 5rem;
+      }
+      .banner {
+        position: relative;
+        width: 90%;
+        height: 20rem;
+      }
+      .image1 {
+        display: block;
+      }
+      .image2 {
+        display: none;
+      }
+      .image3 {
+        display: none;
+      }
+      .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center left;
+      }
+      .left{
+          position: absolute;
+          color: white;
+          top: 50%;
+          left: 1%;
+          font-size: 1.2rem;
+          cursor: pointer;
+      }
+      .right{
+          position: absolute;
+          color: white;
+          top: 50%;
+          right: 1%;
+          font-size: 1.2rem;
+          cursor: pointer;
+      }
+      .banner img {
+        border-radius: 1rem;
+      }
 
-        <body>
-            <div class="header">
-                <a href="Home.html"><i class="fa-solid fa-backward"></i> Back Page</a>
-                <p>PRODUCT LIST</p>
-                <a href="Product_add.html" class="redirect">Add Product</a>
-            </div>
-            <div class="banner">
-                <i class="fa-solid fa-square-caret-left left" onclick="prev()"></i>
-                <img src="https://cdn.pixabay.com/photo/2017/03/02/02/57/glasses-2110282_1280.jpg" alt="Product1" class="image" id="image1">
-                <img src="https://cdn.pixabay.com/photo/2020/09/23/20/28/headphones-5596990_1280.jpg" alt="Product2" class="image" id="image2" style="display:none;">
-                <img src="https://cdn.pixabay.com/photo/2019/09/03/10/53/watch-4449152_1280.jpg" alt="Product3" class="image" id="image3" style="display:none;">
-                <i style="position: absolute; color:white; top:55%; left:87.5%;font-size:1.5rem" class="fa-solid fa-square-caret-right" onclick="next()"></i>
-            </div>
-            <div class="parent" id="parent">        
-            
-                
-            </div>
+      .banner1 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 10rem);
+        gap: 10px;
+        padding: 3.5rem;
+        margin: 0;
+      }
 
-        </body>
-        <script>
-            let currentIndex = 0; // Keep track of the current image
-            const images = document.querySelectorAll('.banner .image'); // Select all images
+      .img1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+      }
 
-            function showImage(index) {
-                // Hide all images
-                images.forEach((img, i) => {
-                    img.style.display = i === index ? 'block' : 'none';
-                });
-            }
+      .img2 {
+        grid-column: 2 / 4;
+        grid-row: 1;
+      }
 
-            function next() {
-                // Increment index and loop back to 0 if out of bounds
-                currentIndex = (currentIndex + 1) % images.length;
-                showImage(currentIndex);
-            }
+      .img3 {
+        grid-column: 2 / 4;
+        grid-row: 2;
+      }
 
-            function prev() {
-                // Decrement index and loop back to last image if out of bounds
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                showImage(currentIndex);
-            }
+      .img4 {
+        grid-column: 4 / 5;
+        grid-row: 1 / 3;
+      }
 
-            // Initially show the first image
-            showImage(currentIndex);
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .banner1 div {
+        overflow: hidden;
+        border-radius: 2rem;
+      }
+      .banner1 img:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease-in-out;
+      }
+      @media (max-width:600px) {
+        .parent {
+          grid-template-columns: repeat(2,1fr);
+        padding: 2rem;
+        gap: 2.5rem;
+      } 
+      .parent img {
+        height: 5rem;
+        border-radius: 0.5rem;
+      }
+        .banner{
+          height: 10rem;
+        }
+        .banner1{
+          grid-template-rows: repeat(2,3rem);
+          padding:2rem;
+        }
+        .banner1 div{
+          border-radius: 0.5rem;
+        }
+        .name {
+        color: black;
+        font-size: x-large;
+        font-weight: 650;
+        padding: 0.7rem;
+      }
+      p {
+        color: rgb(0, 0, 0);
+        font-size: 0.7rem;
+      }
+      .content {
+        padding: 0.5rem;
+      }
 
-            window.onload=function(){
-                    const authToken=localStorage.getItem('authToken')
-                    if(!authToken){
-                        window.location="Login.html"
-                    }
-                    else{
-                       ( async function() {
-                    try {
-            const productResponse = await axios.get("http://127.0.0.1:8888/api/product/getall");
+      .quantity {
+        font-size: 1rem;
+      }
+      .product{
+        display: none;
+      }
+
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="Home.html"><i class="fa-solid fa-backward"></i> Back Page</a>
+      <p class="product">PRODUCT LIST</p>
+      <a href="Product_add.html" class="redirect">Add Product</a>
+    </div>
+    <div class="bannerwrap">
+    <div class="banner">
+      <i
+        class="fa-solid fa-square-caret-left left"
+        onclick="prev()"
+      ></i>
+      <img
+        src="https://cdn.pixabay.com/photo/2017/03/02/02/57/glasses-2110282_1280.jpg"
+        alt="Product1"
+        class="image"
+        id="image1"
+      />
+      <img
+        src="https://cdn.pixabay.com/photo/2020/09/23/20/28/headphones-5596990_1280.jpg"
+        alt="Product2"
+        class="image"
+        id="image2"
+        style="display: none"
+      />
+      <img
+        src="https://cdn.pixabay.com/photo/2019/09/03/10/53/watch-4449152_1280.jpg"
+        alt="Product3"
+        class="image"
+        id="image3"
+        style="display: none"
+      />
+      <i
+        class="fa-solid fa-square-caret-right right"
+        onclick="next()"
+      ></i>
+    </div>
+  </div>
+    <div class="banner1">
+      <div class="img1">
+        <img
+          class="image a"
+          src="https://images.unsplash.com/photo-1522115174737-2497162f69ec?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+      </div>
+      <div class="img2">
+        <img
+          class="image a"
+          src="https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+      </div>
+      <div class="img3">
+        <img
+          class="image a"
+          src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+      </div>
+      <div class="img4">
+        <img
+          class="image a"
+          src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div class="parent" id="parent"></div>
+  </body>
+  <script>
+    let currentIndex = 0; // Keep track of the current image
+    const images = document.querySelectorAll(".banner .image"); // Select all images
+
+    function showImage(index) {
+      // Hide all images
+      images.forEach((img, i) => {
+        img.style.display = i === index ? "block" : "none";
+      });
+    }
+
+    function next() {
+      // Increment index and loop back to 0 if out of bounds
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    function prev() {
+      // Decrement index and loop back to last image if out of bounds
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Initially show the first image
+    showImage(currentIndex);
+
+    window.onload = function () {
+      const authToken = localStorage.getItem("authToken");
+      if (!authToken) {
+        window.location = "Login.html";
+      } else {
+        (async function () {
+          try {
+            const productResponse = await axios.get(
+              "http://127.0.0.1:8888/api/product/getall"
+            );
             const products = productResponse.data;
-            const parent = document.getElementById('parent');
+            const parent = document.getElementById("parent");
 
             products.forEach((product, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = "product-card";
+              const productCard = document.createElement("div");
+              productCard.className = "product-card";
 
-                productCard.innerHTML = `
+              productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}">
                     <p class="name">${product.name}</p>
                     <p class="content">Description: <span style="font-weight:700;">${product.description}</span></p>
                     <p class="content">Price: <span style="font-weight:700;">Rs.${product.price}</span></p>
                     <p class="quantity">Quantity: ${product.qty}</p>
                 `;
-                parent.appendChild(productCard);
+              parent.appendChild(productCard);
             });
-
-        } catch (err) {
+          } catch (err) {
             // Log the error to understand why the request is failing
             console.error("Error fetching products:", err);
-        }
-    })();
-}
-}
-</script>
+          }
+        })();
+      }
+    };
+  </script>
 </html>

@@ -1,177 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
     <title>Login Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js" integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js"
+      integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <style>
-        *{
-            margin:0%;
-            padding:0rem;
-        }
-        main{
-            background: #f1f1f14b;
-            display:flex;
-            height: 100vh;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-image:url(../img/sky.jpg);
-            background-size: cover;
-        }
-        
-        
-        .login{
-            background: rgba(41, 40, 56, 0.529);
-            border-radius: 15px 50px;
-            color:aliceblue;
-            text-align: center;
-            display:flex;
-            flex-direction: column;
-            gap:3rem;
-            padding:3rem;
-        }
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            position: relative;
-        }
-        .details{
-            font-size: x-large;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-style: bold;
-            text-align: left;  
-        }
-        .details label{
-    color: #fff;
-    font-size: 1rem;
-    pointer-events:none;
-    transition: all 0.5s ease-in-out;}
-        input:focus ~ label,
-        input:valid ~ label {
-                top: -2px;
-            }
-        
-        h1{
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      * {
+        margin: 0%;
+        padding: 0rem;
+      }
+      main {
+        background: #f1f1f14b;
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: url(../img/sky.jpg);
+        background-size: cover;
+      }
 
-        }
-        a{
-            text-decoration: none;
-            color: rgb(233, 239, 241);
-            font-size: large;
-        }
-        .button-container{
-            display: flex;
-            justify-content: center;
-            padding:1rem;
-        }
-        button{
-            padding:0.5rem;
-            background-color: transparent;
-            border-radius: 2rem;
-            width:7rem;
-            color: #fff;
-            cursor: pointer;
-            border-color: azure;
+      .login {
+        background: rgba(41, 40, 56, 0.529);
+        border-radius: 15px 50px;
+        color: aliceblue;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding: 3rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        position: relative;
+      }
+      .details {
+        font-size: x-large;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-style: bold;
+        text-align: left;
+      }
+      .details label {
+        color: #fff;
+        font-size: 1rem;
+        pointer-events: none;
+        transition: all 0.5s ease-in-out;
+      }
+      input:focus ~ label,
+      input:valid ~ label {
+        top: -2px;
+      }
 
-        }
-        button:hover{
-            background-color:rgba(0, 0, 0, 0.625);
-        }
-        
-        input{
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            height: 2rem;
-            background: transparent;
-            border-color: transparent;
-            border-bottom-color: rgb(231, 228, 228);
-            width:100%;
-        }
-        a:hover{
-            color: black;
-        }
-        @media (max-width:800px)
-        {
+      h1 {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      a {
+        text-decoration: none;
+        color: rgb(233, 239, 241);
+        font-size: large;
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+      }
+      button {
+        padding: 0.5rem;
+        background-color: transparent;
+        border-radius: 2rem;
+        width: 7rem;
+        color: #fff;
+        cursor: pointer;
+        border-color: azure;
+      }
+      button:hover {
+        background-color: rgba(0, 0, 0, 0.625);
+      }
 
-            h1{
-                font-size: medium;
-            }
-            .login{
-                padding:1.5rem;
-                font-size: medium;
-            }
-            .details{
-                font-size: larger;
-            }
-            input{
-                height: 2rem;
-                font-size: 1.2rem;
-            }
-            
-
-
+      input {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        height: 2rem;
+        background: transparent;
+        border-color: transparent;
+        border-bottom-color: rgb(231, 228, 228);
+        width: 100%;
+      }
+      a:hover {
+        color: black;
+      }
+      @media (max-width: 800px) {
+        h1 {
+          font-size: medium;
         }
+        .login {
+          padding: 1.5rem;
+          font-size: medium;
+        }
+        .details {
+          font-size: larger;
+        }
+        input {
+          height: 2rem;
+          font-size: 1.2rem;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-    <div class="login">
+      <div class="login">
         <h1>LOGIN FOR EXPLORE</h1>
         <form>
-        <div class="details">
-            <label class="user" >Username</label>
-            <input type="text" required id="email"required>
-        </div>
-        <div class="details">
+          <div class="details">
+            <label class="user">Username</label>
+            <input type="text" required id="email" required />
+          </div>
+          <div class="details">
             <label class="user">Password</label>
-            <input type="password" required id="pass"required>
-        </div>
-        <div class="button-container">
-                <button type="button" onclick="login()">Login</button>
-        </div>
+            <input type="password" required id="pass" required />
+          </div>
+          <div class="button-container">
+            <button type="button" onclick="login()">Login</button>
+          </div>
         </form>
-        <p><span>If you don't have a account</span><a href="Register.html"> Click Here <i class="fa-regular fa-user"></i></a></p>
-    </div>
-</main>
-<script>
-    function login() {
-        let email = document.getElementById('email').value;
-        let pass = document.getElementById('pass').value;
+        <p>
+          <span>If you don't have a account</span
+          ><a href="Register.html">
+            Click Here <i class="fa-regular fa-user"></i
+          ></a>
+        </p>
+      </div>
+    </main>
+    <script>
+      function login() {
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("pass").value;
         const formData = {
-            email: email,
-            password: pass
+          email: email,
+          password: pass,
         };
 
-        axios.post('http://127.0.0.1:8888/api/auth/login',formData)
-        .then(response => {
-            const result=response.data
-            if (result.token){
-                //store the auth token in local storage
-                localStorage.setItem('name',result.user_name)
-                localStorage.setItem('authToken',result.token);
-                alert("Login successfully!");
-                window.location="Home.html";
-            }else{
-                alert("Login failed:"+result.message)
+        axios
+          .post("http://127.0.0.1:8888/api/auth/login", formData)
+          .then((response) => {
+            const result = response.data;
+            if (result.token) {
+              //store the auth token in local storage
+              localStorage.setItem("name", result.user_name);
+              localStorage.setItem("authToken", result.token);
+              alert("Login successfully!");
+              window.location = "Home.html";
+            } else {
+              alert("Login failed:" + result.message);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
             alert("Error occurred during login: " + error.message);
-        });
-    }
-    window.onload=function(){
-        const authToken=localStorage.getItem('authToken');
-        console.log(authToken)
-        if(authToken){
-            window.location="Home.html";
+          });
+      }
+      window.onload = function () {
+        const authToken = localStorage.getItem("authToken");
+        console.log(authToken);
+        if (authToken) {
+          window.location = "Home.html";
         }
-    }
-</script>
-
-</body>
+      };
+    </script>
+  </body>
 </html>

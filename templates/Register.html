@@ -174,11 +174,10 @@
                 pic: pic,
                 password:pass
             };
-            console.log("hello")
             axios.post('http://127.0.0.1:8888/api/auth/register',formData)
             .then(response => {
                 const result=response.data;
-                console.log(result)
+                // console.log(result)
                 if (result.error) {
                     alert("Registration failed: " + (result.errors));
                 } else {
